@@ -1,0 +1,19 @@
+{
+  "name": "mutantes",
+  "version": "1.0.0",
+  "description": "A test for MELI",
+  "main": "mutant.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolasEckell/mutantes.git"
+  },
+  "author": "Nicolas Eckell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicolasEckell/mutantes/issues"
+  },
+  "homepage": "https://github.com/NicolasEckell/mutantes#readme"
+}

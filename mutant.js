@@ -19,6 +19,18 @@ const getRowArray = (arr, startPos, index, chunk) => {
 	return data;
 };
 
+const getColumnArray = (arr, startRow, startColumn, chunk) => {
+	let data = [];
+	let N = arr.length;
+	if (startRow + chunk >= N) return data;
+
+	for (let i = 0; i < chunk; i++) {
+		data.push(arr[startRow + i][startColumn]);
+	}
+
+	return data;
+};
+
 const getDiagonalArray = (arr, startRow, startColumn, chunk) => {
 	let data = [];
 	let N = arr.length;
@@ -32,25 +44,13 @@ const getDiagonalArray = (arr, startRow, startColumn, chunk) => {
 	return data;
 };
 
-const getColumnArray = (arr, startRow, startColumn, chunk) => {
-	let data = [];
-	let N = arr.length;
-	if (startRow + chunk >= N) return data;
-
-	for (let i = 0; i < chunk; i++) {
-		data.push(arr[startRow + i][startColumn]);
-	}
-
-	return data;
-};
-
 const isMutant = (arr) => {
 	if (!Array.isArray(arr)) return false;
 	data = initializeMutantArray(arr);
 	let N = data.length;
 	let chunk = 4;
 
-	console.log(data);
+	// console.log(data);
 
 	for (let i = 0; i < N; i++) {
 		let M = data[i].length;
