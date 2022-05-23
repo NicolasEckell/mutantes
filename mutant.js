@@ -1,11 +1,7 @@
 const allEqual = (arr) => arr.every((v) => v === arr[0]);
 
 const initializeMutantArray = (arr) => {
-	let data = [];
-	arr.forEach((v) => {
-		data.push(Array.from(v));
-	});
-	return data;
+	return arr.map((v) => Array.from(v));
 };
 
 const isAnyMutant = (rows, cols, cross) => {
