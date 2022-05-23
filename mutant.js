@@ -14,7 +14,7 @@ const isAnyMutant = (rows, cols, cross) => {
 };
 
 const getRowArray = (arr, startPos, index, chunk) => {
-	let data = [...arr[index].slice(startPos, chunk)];
+	let data = [...arr[index].slice(startPos, startPos + chunk)];
 	if (data.length < chunk) return [];
 	return data;
 };
@@ -32,24 +32,15 @@ const getDiagonalArray = (arr, startRow, startColumn, chunk) => {
 	return data;
 };
 
-const getColumnArray = (arr, startRow, startColumn) => {
+const getColumnArray = (arr, startRow, startColumn, chunk) => {
 	let data = [];
-	try {
-		if (
-			arr[startRow][startColumn] === undefined ||
-			arr[startRow + 1][startColumn] === undefined ||
-			arr[startRow + 2][startColumn] === undefined ||
-			arr[startRow + 3][startColumn] === undefined
-		)
-			return data;
-	} catch (e) {
-		return data;
+	let N = arr.length;
+	if (startRow + chunk >= N) return data;
+
+	for (let i = 0; i < chunk; i++) {
+		data.push(arr[startRow + i][startColumn]);
 	}
 
-	data.push(arr[startRow][startColumn]);
-	data.push(arr[startRow + 1][startColumn]);
-	data.push(arr[startRow + 2][startColumn]);
-	data.push(arr[startRow + 3][startColumn]);
 	return data;
 };
 
@@ -59,14 +50,14 @@ const isMutant = (arr) => {
 	let N = data.length;
 	let chunk = 4;
 
-	// console.log(data);
+	console.log(data);
 
 	for (let i = 0; i < N; i++) {
 		let M = data[i].length;
 		for (let j = 0; j < M; j++) {
-			const rows = getRowArray(arr, j, i, chunk);
-			const cols = getColumnArray(data, i, j);
-			const diagonals = getDiagonalArray(arr, i, j, chunk);
+			const rows = getRowArray(data, j, i, chunk);
+			const cols = getColumnArray(data, i, j, chunk);
+			const diagonals = getDiagonalArray(data, i, j, chunk);
 			if (isAnyMutant(rows, cols, diagonals)) {
 				return true;
 			}
@@ -76,7 +67,13 @@ const isMutant = (arr) => {
 	return false;
 };
 
-let dna = ["TTGCGA", "CAGTGC", "TTATGT", "AGAAAG", "CCCCTA", "TCACTG"];
+let dna = ["TTGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCACTA", "TCACTG"];
+console.log(isMutant(dna) ? "Es mutante" : "No es mutante");
+
+dna = ["ATGCGA", "CAGTGC", "TTATGT", "AGAAAG", "CCACTA", "TCACTG"];
+console.log(isMutant(dna) ? "Es mutante" : "No es mutante");
+
+dna = ["TTGCGT", "CAGTGT", "TTATGA", "AGAAAT", "CCACTA", "TCTTTT"];
 console.log(isMutant(dna) ? "Es mutante" : "No es mutante");
 
 dna = ["ATGCAA", "CAGTGC", "TTATGT", "AGATGG", "CCCATA", "TCACTG"];
