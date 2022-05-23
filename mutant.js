@@ -19,25 +19,16 @@ const getRowArray = (arr, startPos, index, chunk) => {
 	return data;
 };
 
-const getDiagonalArray = (arr, startRow, startColumn) => {
+const getDiagonalArray = (arr, startRow, startColumn, chunk) => {
 	let data = [];
+	let N = arr.length;
+	if (startRow + chunk >= N) return data;
+	let M = arr[startRow + chunk].length;
+	if (startColumn + chunk >= M) return data;
 
-	try {
-		if (
-			arr[startRow][startColumn] === undefined ||
-			arr[startRow + 1][startColumn + 1] === undefined ||
-			arr[startRow + 2][startColumn + 2] === undefined ||
-			arr[startRow + 3][startColumn + 3] === undefined
-		)
-			return data;
-	} catch (e) {
-		return data;
+	for (let i = 0; i < chunk; i++) {
+		data.push(arr[startRow + i][startColumn + i]);
 	}
-
-	data.push(arr[startRow][startColumn]);
-	data.push(arr[startRow + 1][startColumn + 1]);
-	data.push(arr[startRow + 2][startColumn + 2]);
-	data.push(arr[startRow + 3][startColumn + 3]);
 	return data;
 };
 
@@ -75,7 +66,7 @@ const isMutant = (arr) => {
 		for (let j = 0; j < M; j++) {
 			const rows = getRowArray(arr, j, i, chunk);
 			const cols = getColumnArray(data, i, j);
-			const diagonals = getDiagonalArray(arr, i, j);
+			const diagonals = getDiagonalArray(arr, i, j, chunk);
 			if (isAnyMutant(rows, cols, diagonals)) {
 				return true;
 			}
