@@ -4,13 +4,8 @@ const initializeMutantArray = (arr) => {
 	return arr.map((v) => Array.from(v));
 };
 
-const isAnyMutant = (rows, cols, cross) => {
-	if (Array.isArray(rows) && rows.length > 0 && allEqual(rows)) return true;
-	if (Array.isArray(cols) && cols.length > 0 && allEqual(cols)) return true;
-	if (Array.isArray(cross) && cross.length > 0 && allEqual(cross))
-		return true;
-
-	return false;
+const isArrayMutant = (arr) => {
+	return Array.isArray(arr) && arr.length > 0 && allEqual(arr);
 };
 
 const getRowArray = (arr, startPos, index, chunk) => {
@@ -50,17 +45,12 @@ const isMutant = (arr) => {
 	let N = data.length;
 	let chunk = 4;
 
-	// console.log(data);
-
 	for (let i = 0; i < N; i++) {
 		let M = data[i].length;
 		for (let j = 0; j < M; j++) {
-			const rows = getRowArray(data, j, i, chunk);
-			const cols = getColumnArray(data, i, j, chunk);
-			const diagonals = getDiagonalArray(data, i, j, chunk);
-			if (isAnyMutant(rows, cols, diagonals)) {
-				return true;
-			}
+			if(isArrayMutant(getRowArray(data, j, i, chunk))) return true;
+			if(isArrayMutant(getColumnArray(data, j, i, chunk))) return true;
+			if(isArrayMutant(getDiagonalArray(data, j, i, chunk))) return true;
 		}
 	}
 
