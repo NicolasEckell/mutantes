@@ -57,14 +57,4 @@ const isMutant = (arr) => {
 	return false;
 };
 
-let dna = ["TTGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCACTA", "TCACTG"];
-console.log(isMutant(dna) ? "Es mutante" : "No es mutante");
-
-dna = ["ATGCGA", "CAGTGC", "TTATGT", "AGAAAG", "CCACTA", "TCACTG"];
-console.log(isMutant(dna) ? "Es mutante" : "No es mutante");
-
-dna = ["TTGCGT", "CAGTGT", "TTATGA", "AGAAAT", "CCACTA", "TCTTTT"];
-console.log(isMutant(dna) ? "Es mutante" : "No es mutante");
-
-dna = ["ATGCAA", "CAGTGC", "TTATGT", "AGATGG", "CCCATA", "TCACTG"];
-console.log(isMutant(dna) ? "Es mutante" : "No es mutante");
+module.exports.isMutant = isMutant;
