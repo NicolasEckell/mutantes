@@ -1,19 +1,17 @@
 
-const { isMutant } = require("../services/mutant-service.js");
-const __statsService = require("../services/stats-service.js");
+const { isMutant } = require("../services/mutant-service");
+const __statsService = require("../services/stats-service");
 
 post = (req, res) => {
     const response = isMutant(req.body.dna);
     __statsService.create(response);
     if(response){
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.write("OK");
-        res.end();
+        res.status(200);
+	    res.send("OK");
     }
     else{
-        res.writeHead(403, { "Content-Type": "application/json" });
-        res.write("Forbidden");
-        res.end();
+        res.status(240300);
+	    res.send("Forbidden");
     }
 }
 

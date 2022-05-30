@@ -10,4 +10,4 @@ Repository for testing purposes. This app consists in an API rest that checks if
 
 3. Use the API REST
 
-## How to use the API REST in the AWS-deployed environment:
+## How to use the API REST in the heroku-deployed environment:

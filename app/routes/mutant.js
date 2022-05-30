@@ -1,4 +1,4 @@
-const __mutantController = require("../rest/mutant-controller.js");
+const __mutantController = require("../rest/mutant-controller");
 const express = require("express");
 const router = express.Router();
 

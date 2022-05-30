@@ -1,30 +1,26 @@
-const __mongoDriver = require("../dal/mongo-driver");
-const _db = __mongoDriver.db();
-const _modelName = "stats";
+const __statsResource = require("../dal/stats-resource");
 
-const create = async (response) => {
+const create = (response) => {
     let stat = {
         dna: response === true ? 1 : 0
     }
-    let client = await __mongoDriver.client();
-    let data = await client.db(_db).collection(_modelName).insertOne(stat);
+    __statsResource.insert(stat);
 };
 
 const get = async () => {
-    let client = await __mongoDriver.client();
-    let data = await client
-        .db(_db)
-        .collection(_modelName)
-        .find()
-        .toArray();
-
+    let data = await __statsResource.fetch(); 
     let total = data.length;
     let dna = 0;
     for (var value of Object.values(data)) {
-        dna += value["dna"] === true ? 1 : 0;
+        dna += value["dna"] === 1 ? 1 : 0;
     }
-    let ratio = dna / total;
-    return [dna, total, ratio];
+    let ratio = parseFloat((dna / total).toPrecision(2));
+    let output = {
+        "count_mutant_dna": dna, 
+        "count_human_dna": total,
+        "ratio": ratio
+    }
+    return output;
 };
         
 module.exports.create = create;

@@ -7,6 +7,7 @@ var cors = require("cors");
 
 var indexRouter = require("./app/routes/index");
 var mutantRouter = require("./app/routes/mutant");
+var statsRouter = require("./app/routes/stats");
 
 var app = express();
 
@@ -19,6 +20,7 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/mutant", mutantRouter);
+app.use("/stats", statsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

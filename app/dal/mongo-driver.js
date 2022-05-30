@@ -19,7 +19,6 @@ const connectToClientDB = async function () {
 };
 
 const client = function () {
-	console.log(_uri, _db);
 	try {
 		return connectToClientDB();
 	} catch (err) {
