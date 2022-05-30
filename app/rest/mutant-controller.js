@@ -1,8 +1,10 @@
 
 const { isMutant } = require("../services/mutant-service.js");
+const __statsService = require("../services/stats-service.js");
 
 post = (req, res) => {
     const response = isMutant(req.body.dna);
+    __statsService.create(response);
     if(response){
         res.writeHead(200, { "Content-Type": "application/json" });
         res.write("OK");
