@@ -22,7 +22,7 @@ Repository for testing purposes. This app consists in an API rest that checks if
     }
     - Example of bad json:
     {
-        "dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
+        "dna":["ATGCAA", "CAGTGC", "TTATGT", "AGATGG", "CCCATA", "TCACTG"]
     }
 
 - Use GET "/stats" for getting stats of the app.
