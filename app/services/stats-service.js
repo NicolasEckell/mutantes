@@ -1,8 +1,8 @@
 const __statsResource = require("../dal/stats-resource");
 
-const create = (response) => {
+const create = (data) => {
     let stat = {
-        dna: response === true ? 1 : 0
+        dna: data === true ? 1 : 0
     }
     __statsResource.insert(stat);
 };
